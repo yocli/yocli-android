@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598734870955",
+    "project_id": "yocli-android",
+    "storage_bucket": "yocli-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598734870955:android:93bff6eb1828ac31139aee",
+        "android_client_info": {
+          "package_name": "com.yocli.yo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598734870955-c7nr1kb3dtgo90jlegca1cdglkcd2a4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASKLEy7ybN5XoTVPBNxmTBPybQIALUdKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598734870955-c7nr1kb3dtgo90jlegca1cdglkcd2a4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
