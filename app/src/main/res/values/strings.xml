@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Yo Android</string>
+    <string name="unpaired_title">Welcome to Yo</string>
+    <string name="unpaired_body1">Effortlessly send notifications from your terminal to your Android device 💻📲</string>
+    <string name="unpaired_body2">Perfect for long-running build/deploy jobs when you want to grab a ☕️</string>
+    <string name="instructions_blurb">Terminal not set up to use Yo yet?</string>
+    <string name="instructions_link_button">Copy/Share Instructions Link</string>
+    <string name="scan_blurb">Already have a Yo QR Code ready?</string>
+    <string name="scan_button">Scan QR Code</string>
+    <string name="paired_scan_instructions">Want to change the device that\'s paired with Yo?</string>
+    <string name="paired_scan_button">Scan QR Code to Re-pair</string>
+    <string name="paired_body2">Give it a whirl! Invoke the yo command-line tool to send a notification to your phone!</string>
+    <string name="paired_body1">You\'ve successfully paired Yo with your computer!</string>
+    <string name="paired_title">Ready for Action</string>
 </resources>

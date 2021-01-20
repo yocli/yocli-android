@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_graph"
+    app:startDestination="@id/intro">
+
+    <fragment
+        android:id="@+id/intro"
+        android:name="io.yocli.yo.ui.IntroFragment"
+        tools:layout="@layout/intro">
+        <action
+            android:id="@+id/introToScan"
+            app:destination="@id/scan"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/introToPaired"
+            app:destination="@id/paired"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scan"
+        android:name="io.yocli.yo.ui.ScanFragment"
+        tools:layout="@layout/qr_scan">
+        <action
+            android:id="@+id/scanToPaired"
+            app:destination="@id/paired"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paired"
+        android:name="io.yocli.yo.ui.PairedFragment">
+        <action
+            android:id="@+id/pairedToScan"
+            app:destination="@id/scan"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="deviceToken"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+
+</navigation>
