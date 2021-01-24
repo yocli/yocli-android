@@ -1,5 +1,6 @@
 package io.yocli.yo.ui
 
+import android.annotation.SuppressLint
 import androidx.camera.core.ImageProxy
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
@@ -35,10 +36,10 @@ class ScanViewModel : ViewModel() {
         imageFlow
             .filterNotNull()
             .mapNotNull mnn@{ proxy ->
-                val url = runAnalysis(proxy) ?: return@mnn null.also { Timber.e("url null") }
-                val (baseUrl, scanToken) = parseUrl(url) ?: return@mnn null.also {
-                    Timber.e("couldn't parse URL: %s", url)
-                }
+                val url = runAnalysis(proxy)
+                    ?: return@mnn null.also { Timber.w("url null") }
+                val (baseUrl, scanToken) = parseUrl(url)
+                    ?: return@mnn null.also { Timber.e("couldn't parse URL: %s", url) }
                 val deviceToken = fcmToken.await()
                 client.register(baseUrl, scanToken, deviceToken)
                 deviceToken
@@ -54,6 +55,7 @@ class ScanViewModel : ViewModel() {
         imageFlow.tryEmit(proxy)
     }
 
+    @SuppressLint("UnsafeExperimentalUsageError")
     private suspend fun runAnalysis(proxy: ImageProxy): String? = withContext(Dispatchers.Default) {
         proxy.use {
             val input = InputImage.fromMediaImage(proxy.image!!, proxy.imageInfo.rotationDegrees)

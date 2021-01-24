@@ -1,9 +1,9 @@
-
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    id 'com.google.gms.google-services'
+    id "com.google.gms.google-services"
     id "androidx.navigation.safeargs.kotlin"
+    id "io.sentry.android.gradle"
 }
 
 android {
@@ -16,13 +16,17 @@ android {
         versionCode 1
         versionName "1.0"
 
+        resConfigs("en")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    archivesBaseName = "yocli-${defaultConfig.versionName}-(${defaultConfig.versionCode})"
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "app_rules.pro"
         }
     }
 
@@ -37,6 +41,30 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
+//    packagingOptions.resources.excludes += setOf(
+//            "**/*.dot",
+//            "**/*.kotlin_metadata",
+//            "**/*.properties",
+//            "*.properties",
+//            "kotlin/**",
+//            "LICENSE.txt",
+//            "LICENSE_OFL",
+//            "LICENSE_UNICODE",
+//            "META-INF/*.kotlin_module",
+//            "META-INF/*.version",
+//            "META-INF/androidx.*",
+//            "META-INF/CHANGES",
+//            "META-INF/com.uber.crumb/**",
+//            "META-INF/LICENSE",
+//            "META-INF/LICENSE.txt",
+//            "META-INF/NOTICE",
+//            "META-INF/NOTICE.txt",
+//            "META-INF/README.md",
+//            "META-INF/rxjava.properties",
+//            "META-INF/services/javax.annotation.processing.Processor"
+//    )
 }
 
 dependencies {
@@ -65,10 +93,13 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+//    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-    implementation "com.squareup.moshi:moshi:1.11.0"
-    implementation "dev.zacsweers.moshix:moshi-metadata-reflect:0.7.0"
+//    implementation "com.squareup.moshi:moshi:1.11.0"
+//    implementation "dev.zacsweers.moshix:moshi-metadata-reflect:0.7.0"
+
+    implementation "io.sentry:sentry-android-timber:4.0.0-beta.1"
+    implementation "io.sentry:sentry-android:4.0.0-beta.1"
 
     testImplementation "junit:junit:4.13.1"
 }

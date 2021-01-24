@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
+import timber.log.Timber
 
-private val KEY_TOKEN = "token"
+private const val KEY_TOKEN = "token"
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -15,12 +16,10 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun runIfPaired(block: () -> Unit) {
         val prefs = prefs!!
         val token = prefs.getString(KEY_TOKEN, null)
-        if (token != null) {
-            block()
-        }
+        if (token != null) block()
     }
 
-    fun persistPairing(deviceToken : String){
+    fun persistPairing(deviceToken: String) {
         prefs?.edit {
             putString(KEY_TOKEN, deviceToken)
         }

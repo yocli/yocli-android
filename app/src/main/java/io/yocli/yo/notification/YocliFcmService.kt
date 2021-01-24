@@ -25,7 +25,7 @@ class YocliFcmService : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, channel.id)
             .setContentTitle(rNotif.title)
             .setContentText(rNotif.body)
-            .setSmallIcon(IconCompat.createWithResource(this.applicationContext, R.mipmap.ic_launcher))
+            .setSmallIcon(IconCompat.createWithResource(this.applicationContext, R.drawable.ic_yo_notif))
             .build()
         nmc.notify(1, notification)
     }
@@ -37,7 +37,7 @@ private fun NotificationManagerCompat.getOrCreateChannel(channelId: String): Not
             NotificationChannelCompat.Builder(channelId, NotificationManagerCompat.IMPORTANCE_HIGH)
                 .setName("Yo!")
                 .setShowBadge(true)
-                .setDescription("Notifies when your Yocli task is complete")
+                .setDescription("Notifies when your Yo-CLI task is complete")
                 .build())
         getNotificationChannelCompat(channelId)!!
     }

@@ -1,50 +1,43 @@
 package io.yocli.yo.network
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
-import dev.zacsweers.moshix.reflect.MetadataKotlinJsonAdapterFactory
+import io.yocli.yo.BuildConfig
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Url
 import timber.log.Timber
 
-@JsonClass(generateAdapter = true)
-data class RegisterBody(
-    @Json(name = "pc_token") val scanToken: String,
-    @Json(name = "apns_device_token") val fcmToken: String,
-    @Json(name = "is_firebase") val isAndroidRegistering: Boolean = true,
-)
+const val JSON_TEMPLATE = """{ "pc_token": "%s", "apns_device_token": "%s", "is_firebase": true }"""
 
 interface Api {
     @POST
-    suspend fun register(@Url url: String, @Body body: RegisterBody): Response<Unit>
+    suspend fun register(@Url url: String, @Body body: RequestBody): Response<Unit>
 }
 
 class ApiClient() {
     private val api: Api
 
     init {
-        val moshi = Moshi.Builder()
-            .add(MetadataKotlinJsonAdapterFactory())
-            .build()
         val retrofit = Retrofit.Builder()
             .client(
                 OkHttpClient()
                     .newBuilder()
-                    .addInterceptor(HttpLoggingInterceptor().apply { level = Level.BODY })
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        level = when (BuildConfig.DEBUG) {
+                            true -> Level.BODY
+                            else -> Level.BASIC
+                        }
+                    })
                     .build()
             )
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl("https://api.yocli.io/")
             .validateEagerly(true)
             .build()
@@ -52,8 +45,11 @@ class ApiClient() {
     }
 
     suspend fun register(url: String, scanToken: String, fcmToken: String) {
-        val body = RegisterBody(scanToken, fcmToken, true)
-        val response = api.register("$url/register_for_notifications", body)
-        return response.body() ?: Unit
+        val json = JSON_TEMPLATE.format(scanToken, fcmToken)
+        val body = json.toRequestBody("application/json".toMediaTypeOrNull())
+        return runCatching { api.register("$url/register_for_notifications", body).body() }
+            .onFailure { Timber.e(it, """Error registering with backend for scan token "%s" """, scanToken) }
+            .getOrNull()
+            ?: Unit
     }
 }
