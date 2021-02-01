@@ -5,9 +5,12 @@
 
     <color name="mainColor">#063440</color>
 
+    <color name="ic_launcher_background">#063440</color>
+
     <color name="reticle_ripple">#9AFFFFFF</color>
     <color name="barcode_reticle_background">#99000000</color>
     <color name="barcode_reticle_stroke">#40000000</color>
     <color name="barcode_field_value">#797979</color>
     <color name="barcode_field_box_stroke">#757575</color>
+
 </resources>

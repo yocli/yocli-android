@@ -6,9 +6,7 @@ import io.sentry.SentryLevel.ERROR
 import io.sentry.SentryLevel.INFO
 import io.sentry.android.core.SentryAndroid
 import io.sentry.android.timber.SentryTimberIntegration
-import io.yocli.yo.R.id
 import io.yocli.yo.R.layout
-import io.yocli.yo.ui.IntroFragment
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(layout.main_activity) {

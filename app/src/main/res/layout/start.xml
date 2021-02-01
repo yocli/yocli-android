@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="io.yocli.yo.ui.IntroFragment">
+    tools:context="io.yocli.yo.ui.StartFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start"

@@ -1,16 +1,12 @@
 package io.yocli.yo.barcode.view
 
 import android.content.Context
-import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import com.google.android.gms.vision.CameraSource
 import java.util.ArrayList
-import java.util.concurrent.atomic.AtomicMarkableReference
-import java.util.concurrent.atomic.AtomicReference
 
 /**
  * A view which renders a series of custom graphics to be overlaid on top of an associated preview
@@ -49,22 +45,6 @@ class GraphicOverlay(context: Context, attrs: AttributeSet) : View(context, attr
     fun add(graphic: GraphicBase) {
         synchronized(lock) {
             graphics.add(graphic)
-        }
-    }
-
-    /**
-     * Sets the camera attributes for size and facing direction, which informs how to transform image
-     * coordinates later.
-     */
-    fun setCameraInfo(cameraSource: CameraSource) {
-        val previewSize = cameraSource.previewSize ?: return
-        if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // Swap width and height when in portrait, since camera's natural orientation is landscape.
-            previewWidth = previewSize.height
-            previewHeight = previewSize.width
-        } else {
-            previewWidth = previewSize.width
-            previewHeight = previewSize.height
         }
     }
 

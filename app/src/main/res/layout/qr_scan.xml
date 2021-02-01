@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lensFacing="back"
-        app:pinchToZoomEnabled="false" />
+        app:pinchToZoomEnabled="false"
+        tools:background="@tools:sample/backgrounds/scenic" />
 
     <io.yocli.yo.barcode.view.GraphicOverlay
         android:id="@+id/overlay"

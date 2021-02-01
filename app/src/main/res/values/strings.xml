@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yo Android</string>
+    <string name="app_name">Yo - Terminal Notifications</string>
     <string name="unpaired_title">Welcome to Yo</string>
     <string name="unpaired_body1">Effortlessly send notifications from your terminal to your Android device 💻📲</string>
     <string name="unpaired_body2">Perfect for long-running build/deploy jobs when you want to grab a ☕️</string>
@@ -12,4 +12,8 @@
     <string name="paired_body2">Give it a whirl! Invoke the yo command-line tool to send a notification to your phone!</string>
     <string name="paired_body1">You\'ve successfully paired Yo with your computer!</string>
     <string name="paired_title">Ready for Action</string>
+    <string name="disabled_notifications_title">Notifications Disabled</string>
+    <string name="disabled_notifications_body1">You\'ve disallowed Yo from sending notifications to your device.</string>
+    <string name="disabled_notifications_body2">Yo uses notifications in order to alert you when it\'s invoked.\nPlease consider changing your notification settings</string>
+    <string name="disabled_notifications_change_button">Change Notification Settings</string>
 </resources>

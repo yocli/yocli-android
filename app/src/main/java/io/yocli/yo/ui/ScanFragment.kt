@@ -46,7 +46,7 @@ class ScanFragment : Fragment(R.layout.qr_scan) {
             .filterNotNull()
             .onEach { deviceToken ->
                 animator.cancel()
-                findNavController().navigate(ScanFragmentDirections.scanToPaired(deviceToken))
+                findNavController().navigate(ScanFragmentDirections.scanToStart(deviceToken))
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
